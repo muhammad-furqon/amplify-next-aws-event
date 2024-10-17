@@ -1,7 +1,6 @@
 import { onDeletePost } from "@/actions/actions";
 import Post from "@/components/Post";
 import { cookieBasedClient, isAuthenticated  } from "@/utils/amplify-utils";
-import Image from "next/image";
 
 export default async function Home() {
   const isSignedIn = await isAuthenticated();
@@ -17,6 +16,7 @@ export default async function Home() {
       <h1 className="text-2xl pb-10">List of All Titles</h1>
       {posts?.map(async (post, idx) => (
         <Post
+        key={idx}
         onDelete={onDeletePost}
         post={post}
         isSignedIn={await isAuthenticated()}

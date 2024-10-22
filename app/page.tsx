@@ -1,6 +1,6 @@
 import { onDeletePost } from "@/actions/actions";
 import Post from "@/components/Post";
-import { cookieBasedClient, currentUserGroup, isAuthenticated  } from "@/utils/amplify-utils";
+import { cookieBasedClient, isAuthenticated  } from "@/utils/amplify-utils";
 
 export default async function Home() {
   const isSignedIn = await isAuthenticated();

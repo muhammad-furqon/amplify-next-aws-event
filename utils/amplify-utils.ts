@@ -74,8 +74,8 @@ await runWithAmplifyServerContext({
             // console.log("id token", session?.tokens?.idToken);
             // console.log("access token", session?.tokens?.accessToken);
             const currentUserGroup = session?.tokens?.idToken?.payload["cognito:groups"];
-            // console.log("user belongs to following groups: " + currentUserGroup);
-            return currentUserGroup === "ADMINS";     
+            console.log("user belongs to following groups: " + currentUserGroup);
+            return currentUserGroup?.toString() === "ADMINS";     
         }
         catch (error) {
             console.error('Error fetching auth session:', error);

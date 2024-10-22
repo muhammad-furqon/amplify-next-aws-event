@@ -1,16 +1,21 @@
 import { createPost } from "@/actions/actions";
+import { isAdmin } from "@/utils/amplify-utils";
+import '@aws-amplify/ui-react/styles.css';
+import { redirect } from "next/navigation";
 
-export default function AdminPage() {
-  //TODO Verif if admin
-  // const result = await verifyAuth();
 
-  // if(!result.user){
-  //   return redirect("/");
-  // }
+export default async function AdminPage() {
+  //Verification if admin
+  if(!await isAdmin()){
+    console.log("Redirecting non admin");
+    return redirect("/");
+  }
 
   return (
     <div>
-      <h1>ADMIN PAGE</h1>
+      <div className="flex flex-col items-center p-4 gap-4">
+      <h1 className="text-2xl font-bold">This is the ADMIN'S PAGE</h1>
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Hub } from "aws-amplify/utils";
 import { useTransition } from "react";
 
-export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
+export default function NavBar({ isSignedIn, isAdmin }: { isSignedIn: boolean , isAdmin:boolean}) {
   const [authCheck, setAuthCheck] = useState(isSignedIn);
   const [, startTransition] = useTransition();
 
@@ -50,10 +50,16 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
       label: "Add Title",
       loggedIn: true,
     },
+    {
+      href: "/admin",
+      label: "Admin",
+      loggedIn: true,
+      isAdmin: true
+    },
   ];
 
   const routes = defaultRoutes.filter(
-    (route) => route.loggedIn === authCheck || route.loggedIn === undefined
+    (route) => (route.loggedIn === authCheck || route.loggedIn === undefined) && (route.isAdmin === isAdmin || route.isAdmin === undefined)
   );
 
   return (
@@ -71,6 +77,7 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
             </Link>
           ))}
         </Flex>
+
         <Button
           variation="primary"
           borderRadius="2rem"

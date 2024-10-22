@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Auth from "@/components/auth/Auth";
 import NavBar from "@/components/Nav";
-import { isAuthenticated } from "@/utils/amplify-utils";
+import { isAdmin, isAuthenticated } from "@/utils/amplify-utils";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NavBar isSignedIn={await isAuthenticated()} />
+        <NavBar isSignedIn={await isAuthenticated()} isAdmin={await isAdmin()} />
         <Auth>
           {children}
         </Auth>

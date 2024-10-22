@@ -1,6 +1,7 @@
 import { onDeletePost } from "@/actions/actions";
 import Post from "@/components/Post";
-import { cookieBasedClient, isAuthenticated  } from "@/utils/amplify-utils";
+import { cookieBasedClient, currentUserGroup, isAuthenticated  } from "@/utils/amplify-utils";
+import { fetchAuthSession, fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
 
 export default async function Home() {
   const isSignedIn = await isAuthenticated();
@@ -9,7 +10,11 @@ export default async function Home() {
     authMode: isSignedIn ? "userPool" : "identityPool",
   })
 
-  console.log("posts", posts)
+  // console.log("posts", posts)
+
+  // const { tokens } = await fetchAuthSession();
+  // console.log("token", tokens);
+  console.log("user belongs to following groups: " + currentUserGroup());
 
   return (
     <main className="flex flex-col items-center justify-between p-24 w-1/2 m-auto">

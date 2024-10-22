@@ -3,5 +3,8 @@
 import { Authenticator } from "@aws-amplify/ui-react"
 
 export default function AuthClient(){
-    return <Authenticator />
+    return (
+        <Authenticator>
+        </Authenticator>
+      );
 }
